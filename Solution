@@ -1,0 +1,56 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+
+
+namespace firstProblemMidleExam
+{
+    internal class Program
+
+    {
+        static void Main(string[] args)
+
+        {
+
+            int num = int.Parse(Console.ReadLine());
+            Dictionary<string, string> result = new Dictionary<string, string>();
+
+
+            for (int i = 0; i < num; i++)
+            {
+                List<string> input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                if (input[0] == "register")
+                {
+                    if (result.ContainsKey(input[1]))
+                    {
+                        Console.WriteLine($"ERROR: already registered with plate number {result[input[1]]}");
+                    }
+                    else
+                    {
+                        result.Add(input[1], input[2]);
+                        Console.WriteLine($"{input[1]} registered {input[2]} successfully"); 
+                    }
+                }
+                else if (input[0] == "unregister")
+                {
+                    if (result.ContainsKey(input[1]))
+                    {
+                        result.Remove(input[1]);
+                        Console.WriteLine($"{input[1]} unregistered successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"ERROR: user {input[1]} not found");
+                    }
+                }
+            }
+
+            foreach (var item in result)
+            {
+                Console.WriteLine($"{item.Key} => {item.Value}");
+            }
+        }
+    }
+}
